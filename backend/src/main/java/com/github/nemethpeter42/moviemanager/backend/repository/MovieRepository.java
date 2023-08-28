@@ -12,11 +12,13 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
-    List<Movie> findByOriginalTitle(String originalTitle);
 
     //List<Person> findByAgeBetween(Integer min, Integer max);
 
+
+    //Query annotation fields param - :1 includes field :0 doesn't include field
+    //more info: https://www.baeldung.com/mongodb-return-specific-fields
     @Query(value = "{ 'rating' : { $gt : ?0, $lt : ?1}}",
            fields = "{comments:  0}")
-    List<Movie> findMovieBetwwenRatings(Integer min, Integer max);
+    List<Movie> findMovieBetweenRatings(Integer min, Integer max);
 }

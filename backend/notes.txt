@@ -1,0 +1,9 @@
+TODO readme
+
+http://localhost:8090/swagger-ui/index.html
+
+test> use demo
+switched to db demo
+demo> db.createUser({user:"admin","roles":[{"role":"readWrite","db":"demo"}],"pwd":"password"})
+{ ok: 1 }
+demo> db.getUsers()
