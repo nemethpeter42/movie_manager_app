@@ -3,7 +3,6 @@ package com.github.nemethpeter42.moviemanager.backend.service;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,6 +17,7 @@ import com.github.nemethpeter42.moviemanager.backend.repository.MovieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -30,6 +30,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public String save(Movie movie) {
+        //omit modification of comments
+        if (movie.getMovieId() != null && !movieRepository.findById(movie.getMovieId()).equals(Optional.empty())) {
+            Movie existingMovie = movieRepository.findById(movie.getMovieId()).get();
+            movie.setComments(existingMovie.getComments());
+        }
         return movieRepository.save(movie).getMovieId();
     }
 
@@ -67,7 +72,7 @@ public class MovieServiceImpl implements MovieService {
 
         if(!criteria.isEmpty()) {
             query.addCriteria(new Criteria()
-                    .andOperator(criteria.toArray(new Criteria[0])));
+                .andOperator(criteria.toArray(new Criteria[0])));
         }
 
         Page<Movie> movies = PageableExecutionUtils.getPage(
@@ -100,26 +105,26 @@ public class MovieServiceImpl implements MovieService {
     public List<Document> getNumOfMoviesByYear() {
 
         UnwindOperation unwindOperation
-                = Aggregation.unwind("releaseInfo");
+            = Aggregation.unwind("releaseInfo");
         GroupOperation groupOperation
-                = Aggregation.group("releaseInfo.year")
-                .count().as("yearCount");
+            = Aggregation.group("releaseInfo.year")
+            .count().as("yearCount");
         SortOperation sortOperation
                 = Aggregation.sort(Sort.Direction.DESC, "yearCount");
 
         ProjectionOperation projectionOperation
-                = Aggregation.project()
-                .andExpression("_id").as("year")
-                .andExpression("yearCount").as("count")
-                .andExclude("_id");
+            = Aggregation.project()
+            .andExpression("_id").as("year")
+            .andExpression("yearCount").as("count")
+            .andExclude("_id");
 
         Aggregation aggregation
                 = Aggregation.newAggregation(unwindOperation,groupOperation,sortOperation,projectionOperation);
 
         List<Document> documents
-                = mongoTemplate.aggregate(aggregation,
-                Movie.class,
-                Document.class).getMappedResults();
+            = mongoTemplate.aggregate(aggregation,
+            Movie.class,
+            Document.class).getMappedResults();
         return  documents;
     }
 }
