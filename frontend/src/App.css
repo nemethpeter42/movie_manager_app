@@ -10,17 +10,3 @@
   align-items: center;
   flex-direction: column;
 }
-
-.displayMovies {
-  margin-top: 20px;
-}
-
-.displayMovies div {
-  width: 400px;
-  height: 150px;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-}

@@ -30,7 +30,7 @@ public class Movie {
      * prec = precedence: 
      * 0 - already watched, 
      * 1 - watch it next time, 
-     * 2 - watch it later, 
+     * 2 - watch it later,
      * 3 - don't watch it 
      * */
     private String prec;

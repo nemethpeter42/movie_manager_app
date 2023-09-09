@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { MoviesData } from "../FakeData";
+
 
 export const movieSlice = createSlice({
   name: "movie",
@@ -16,7 +17,7 @@ export const movieSlice = createSlice({
 
     updateMovie: (state, action) => {
       state.entries.map((movie) => {
-        if (movie.id === action.payload.id) {
+        if (movie.id?.toString() === action.payload.id?.toString()) {
           movie.originalTitle = action.payload.originalTitle;
           movie.localTitle = action.payload.localTitle;
         }
