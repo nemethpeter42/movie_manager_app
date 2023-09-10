@@ -13,7 +13,6 @@ import com.github.nemethpeter42.moviemanager.backend.service.MovieService;
 
 import java.util.List;
 
-@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
@@ -29,6 +28,11 @@ public class MovieController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         movieService.delete(id);
+    }
+
+    @GetMapping("/findAllById")
+    public List<Movie> findAllById(@RequestParam List<String> ids) {
+        return movieService.findAllById(ids);
     }
 
     @GetMapping("/getByRating")

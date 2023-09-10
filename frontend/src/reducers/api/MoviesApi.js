@@ -5,6 +5,7 @@ export const moviesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8090/",
     prepareHeaders: (headers) => {
+      headers.set('Access-Control-Allow-Origin', '*')
     },
   }),
   tagTypes: ['Movie'],
@@ -26,17 +27,37 @@ export const moviesApi = createApi({
       },
       providesTags: ['Movie'],
     }),
-    /*deleteMovie: builder.query({
-      query: ({movieId}) => {
+
+    findAllById: builder.query({
+      query: ({ids}) => {
         return ({
-          url: 'movie',
-          method: 'DELETE',
-          body: { 
-            movieId,
+          url: 'movie/findAllById',
+          method: 'GET',
+          params: { 
+            ids,
           }
-        });
+        })
       },
-    }),*/
+      providesTags: ['Movie'],
+    }),
+    saveMovie: builder.mutation({
+      query: ({movieId, originalTitle, localTitle, prec, releaseInfo, rating,}) => ({
+        url: `/movie`,
+        method: 'POST',
+        body: {
+          movieId,
+          originalTitle, 
+          localTitle, 
+          prec, 
+          releaseInfo, 
+          rating,
+          comments:[],
+        },
+        responseHandler: "text", // by default RTK Query treats it as JSON, so unwrap fails 
+        //credentials: 'include',
+      }),
+      invalidatesTags: ['Movie'],
+    }),
     deleteMovie: builder.mutation({
       query: (id) => ({
         url: `/movie/${id}`,
@@ -51,4 +72,6 @@ export const moviesApi = createApi({
 export const { 
   useSearchMoviesQuery,
   useDeleteMovieMutation,
+  useSaveMovieMutation,
+  useLazyFindAllByIdQuery,
 } = moviesApi;

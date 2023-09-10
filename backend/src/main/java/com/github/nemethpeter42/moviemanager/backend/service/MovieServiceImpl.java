@@ -44,6 +44,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<Movie> findAllById(List<String> ids) {
+        return movieRepository.findAllById(ids);
+    }
+
+    @Override
     public List<Movie> getMoviesByRating(Integer minRating, Integer maxRating) {
         return movieRepository.findMovieBetweenRatings(minRating,maxRating);
     }

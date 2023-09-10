@@ -13,6 +13,8 @@ public interface MovieService {
 
     void delete(String id);
 
+    List<Movie> findAllById(List<String> ids);
+
     List<Movie> getMoviesByRating(Integer minRating, Integer maxRating);
 
     Page<Movie> search(String originalTitle, String localTitle, Integer minRating, Integer maxRating, String prec, Integer year, Pageable pageable);
