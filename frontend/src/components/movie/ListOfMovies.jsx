@@ -5,13 +5,15 @@ import { addMovie, deleteMovie, updateMovie } from "../../reducers/MovieReducer"
 import { ChatBubbleLeftIcon, StarIcon, PlusIcon } from "@heroicons/react/24/solid"
 import {useNavigate} from "react-router-dom"
 import CreateMovie from "./CreateMovie";
-
+import { useSearchMoviesQuery, useDeleteMovieMutation } from "../../reducers/api/MoviesApi";
 function ListOfMovies() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const movieList = useSelector((state) => state.movies.entries);
+  const [deleteMovie, deleteMovieResponse] = useDeleteMovieMutation()
+  //const movieList = useSelector((state) => state.movies.entries);
 
-  const [newOriginalTitle, setNewOriginalTitle] = useState("");
+  const { data: movieList, error, isLoading } = useSearchMoviesQuery({})
+
 
   const getPrecedence = (num) => {
     const precedences = {
@@ -53,7 +55,7 @@ function ListOfMovies() {
             </tr>
         </thead>
         <tbody>
-          {movieList.map((movie,i) => {
+          {movieList?.content?.map((movie,i) => {
             return (
               <tr 
                 key={i}
@@ -104,11 +106,7 @@ function ListOfMovies() {
                       className="text-red-500 cursor-pointer m-1"
                       onClick={() => {
                         //console.log(`DEBUG ${movie.movieId}`)
-                        dispatch(
-                          deleteMovie({
-                            movieId:movie.movieId,
-                          })
-                        );
+                        deleteMovie(movie.movieId)
                       }}
                       >
                       Delete

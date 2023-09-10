@@ -13,6 +13,7 @@ import com.github.nemethpeter42.moviemanager.backend.service.MovieService;
 
 import java.util.List;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
