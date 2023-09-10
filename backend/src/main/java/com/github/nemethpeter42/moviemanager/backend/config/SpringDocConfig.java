@@ -16,13 +16,13 @@ public class SpringDocConfig {
     @Bean
     public GroupedOpenApi api() {
         return GroupedOpenApi.builder()
-            .group("springshop-public")
+            .group("moviemanagerbackend-public")
             .pathsToMatch("/**")
             .build();
     }
 
     @Bean
-    public OpenAPI springShopOpenAPI() {
+    public OpenAPI movieManagerBackendOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Movie Manager Backend API")
                 .description("Spring Boot back-end for movie manager app")

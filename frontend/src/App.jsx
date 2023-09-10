@@ -14,12 +14,11 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    
-    <div className="App">
+    <div className="max-w-7xl m-auto">
       <Routes>
         <Route path="/" element={<ListOfMovies />}/>
         <Route path="/create" element={<CreateMovie />}/>
-        <Route path="/update/:id" element={<UpdateMovie />}/>
+        <Route path="/update/:movieId" element={<UpdateMovie />}/>
         <Route path="*" element={<NotFound />}/>
 
       </Routes>

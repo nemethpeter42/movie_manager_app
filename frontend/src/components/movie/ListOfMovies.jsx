@@ -20,14 +20,14 @@ function ListOfMovies() {
       2: `watch later`,
       3: `don't watch`,
     }
-    return precedences[num] ?? `unknown value`
+    return precedences[num] ?? ``
   }
 
   return (
     <div>
-      <div className="shadow-md sm:rounded-lg">
+      <div className="shadow-md sm:rounded-lg m-2">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
                   Original Title
@@ -58,8 +58,12 @@ function ListOfMovies() {
               <tr 
                 key={i}
                 className={`
-                  ${true ? `border-b border-gray-200`: ``}
-                  ${true ? `dark:border-gray-700`: ``}
+                  border-b 
+                  ${
+                    i % 2 === 0 ? 
+                    `bg-gray-200 border-gray-300 dark:border-gray-700`: 
+                    `bg-gray-100 border-gray-300 dark:border-gray-700`
+                  }
                 `}
                 >
                 <td className="px-6 py-4">
@@ -91,7 +95,7 @@ function ListOfMovies() {
                     <div 
                       className="text-yellow-500 cursor-pointer m-1"
                       onClick={() => {
-                        navigate(`/update/${movie.id}`);
+                        navigate(`/update/${movie.movieId}`);
                       }}
                       >
                       Edit
@@ -99,10 +103,10 @@ function ListOfMovies() {
                     <div 
                       className="text-red-500 cursor-pointer m-1"
                       onClick={() => {
-                        //console.log(`DEBUG ${movie.id}`)
+                        //console.log(`DEBUG ${movie.movieId}`)
                         dispatch(
                           deleteMovie({
-                            id:movie.id,
+                            movieId:movie.movieId,
                           })
                         );
                       }}

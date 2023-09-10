@@ -12,12 +12,12 @@ export const movieSlice = createSlice({
     },
 
     deleteMovie: (state, action) => {
-      state.entries = state.entries.filter((movie) => movie.id !== action.payload.id);
+      state.entries = state.entries.filter((movie) => movie.movieId !== action.payload.movieId);
     },
 
     updateMovie: (state, action) => {
       state.entries.map((movie) => {
-        if (movie.id?.toString() === action.payload.id?.toString()) {
+        if (movie.movieId?.toString() === action.payload.movieId?.toString()) {
           movie.originalTitle = action.payload.originalTitle;
           movie.localTitle = action.payload.localTitle;
         }
