@@ -4,11 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MovieListComponent } from './movie-list/movie-list.component';
-import { MovieCreateComponent } from './movie-create/movie-create.component';
-import { MovieUpdateComponent } from './movie-update/movie-update.component';
-import { DemoComponentComponent } from './demo-component/demo-component.component';
-import { SandboxComponentComponent } from './sandbox-component/sandbox-component.component';
+import { MovieListComponent } from './movie/movie-list/movie-list.component';
+import { MovieCreateComponent } from './movie/movie-create/movie-create.component';
+import { MovieUpdateComponent } from './movie/movie-update/movie-update.component';
+import { SandboxComponent } from './sandbox/sandbox-component/sandbox.component';
+import {StoreModule} from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -16,13 +20,17 @@ import { SandboxComponentComponent } from './sandbox-component/sandbox-component
     MovieListComponent,
     MovieCreateComponent,
     MovieUpdateComponent,
-    DemoComponentComponent,
-    SandboxComponentComponent
+    SandboxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    EffectsModule.forRoot([]),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
