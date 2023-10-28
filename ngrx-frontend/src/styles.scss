@@ -25,8 +25,8 @@ $angular-default-theme: mat.define-light-theme(
 $angular-dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: $angular-primary,
-      accent: $angular-accent,
+      primary: mat.define-palette(mat.$pink-palette),
+      accent: mat.define-palette(mat.$blue-grey-palette),
       warn: $angular-warn,
     ),
   )
@@ -34,6 +34,16 @@ $angular-dark-theme: mat.define-dark-theme(
 
 .darkMode {
   @include mat.all-component-colors($angular-dark-theme);
+}
+.mat-app-background {
+  min-height: 100vh;
+}
+
+//Tailwind conflicts with Material at outlined-style form fields
+// see: https://stackoverflow.com/questions/75535246/angular-mat-form-field-not-working-properly-a-border-line-appears-inside-the-f
+.mdc-notched-outline__notch
+{
+  border-right: none;
 }
 
 

@@ -36,7 +36,7 @@ export class DarkModeToggleComponent implements AfterViewInit {
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe((darkMode) => {
       const darkClassName = 'darkMode';
-      this.className = darkMode ? darkClassName : '';
+      //this.className = darkMode ? darkClassName : '';
       if (darkMode) {
         // INFO seen this in the tutorial
         // didn' work because it gets only the component's container element, but I leave it here for possible future uses

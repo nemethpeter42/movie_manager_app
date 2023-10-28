@@ -1,6 +1,8 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <div>Movie Manager App</div>
+    <div class="mx-2">Movie Manager App</div>
+    <button mat-button class="mx-2" [class.active]="currUrl.split('/').at(1)==='movie'" (click)="this.router.navigate(['/movie'])">Movies</button>
+    <button mat-button class="mx-2" [class.active]="currUrl.split('/').at(1)==='sandbox'" (click)="this.router.navigate(['/sandbox'])">Sandbox</button>
     <div class="flex-auto"></div>
     <app-dark-mode-toggle></app-dark-mode-toggle>
   </mat-toolbar-row>

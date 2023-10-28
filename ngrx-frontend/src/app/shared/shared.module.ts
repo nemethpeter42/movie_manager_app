@@ -6,14 +6,31 @@ import { DefaultNavbarComponent } from './default-navbar/default-navbar.componen
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
+const materialModules = [
+  MatToolbarModule,
+  MatIconModule,
+  MatSlideToggleModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
+]
 
 @NgModule({
  imports:      [ 
   CommonModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatSlideToggleModule,
   ReactiveFormsModule,
+  ...materialModules,
 ],
  declarations: [ 
    DarkModeToggleComponent, 
@@ -24,9 +41,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     DefaultNavbarComponent,
     CommonModule, 
     ReactiveFormsModule,  
-    MatToolbarModule,
-    MatIconModule,
-    MatSlideToggleModule,
-  ]
+    ...materialModules,
+  ],
+  providers:[
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+  ],
 })
 export class SharedModule { }
