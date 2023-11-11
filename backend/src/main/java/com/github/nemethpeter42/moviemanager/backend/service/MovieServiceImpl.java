@@ -44,6 +44,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<Movie> getAll(){
+        return movieRepository.findAll();
+    }
+
+    @Override
     public List<Movie> findAllById(List<String> ids) {
         return movieRepository.findAllById(ids);
     }

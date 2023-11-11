@@ -14,6 +14,8 @@ public interface MovieService {
     void delete(String id);
 
     List<Movie> findAllById(List<String> ids);
+    
+    List<Movie> getAll(); 
 
     List<Movie> getMoviesByRating(Integer minRating, Integer maxRating);
 

@@ -46,7 +46,9 @@ $angular-dark-theme: mat.define-dark-theme(
   border-right: none;
 }
 
-
+//INFO if you get VSCode warnings, go settings, 
+//search for Unknown At Rules and select "ignore"
+//(there are multiple instances in both CSS and SCSS sections!)
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -9,3 +9,8 @@ table {
 td, th {
   width: 25%;
 }
+
+.footer-row{
+  color: var(--mat-paginator-container-text-color);
+  background-color: var(--mat-paginator-container-background-color);
+}

@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
 
 const materialModules = [
   MatToolbarModule,
@@ -30,6 +31,7 @@ const materialModules = [
  imports:      [ 
   CommonModule,
   ReactiveFormsModule,
+  HttpClientModule,
   ...materialModules,
 ],
  declarations: [ 
@@ -41,6 +43,7 @@ const materialModules = [
     DefaultNavbarComponent,
     CommonModule, 
     ReactiveFormsModule,  
+    HttpClientModule,
     ...materialModules,
   ],
   providers:[

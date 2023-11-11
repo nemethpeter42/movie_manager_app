@@ -1,12 +1,15 @@
 
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 // INFO be careful as there is also a type called Event in plain JS
 import { NavigationEnd, ActivatedRoute, Event as NavigationEvent, Router } from '@angular/router';
+import { Movie } from 'src/app/models/movie.model';
+import { State, movieFeature } from 'src/app/reducers/movie/movie.state';
+import { Store } from '@ngrx/store';
 
 export interface UserData {
   id: string;
@@ -56,11 +59,12 @@ const NAMES: string[] = [
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.scss']
 })
-export class MovieListComponent implements AfterViewInit {
+export class MovieListComponent implements AfterViewInit, OnInit {
+  movies$!: Observable<Movie[]>;
   private currRoute$: Subscription;
   public router: Router
   currUrl: string = ``
-  constructor(private route: ActivatedRoute, private _router: Router) {
+  constructor(private route: ActivatedRoute, private _router: Router, private store: Store<State>) {
     this.router = _router
     this.currRoute$ = _router.events.subscribe((event: NavigationEvent) => {
       if(event instanceof NavigationEnd) {
@@ -77,13 +81,17 @@ export class MovieListComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource(users);
   }
 
+  ngOnInit(): void {
+      this.movies$ = this.store.select(movieFeature.selectAll)
+  }
+
   ngOnDestroy() {
     this.currRoute$.unsubscribe();
   }
 
 
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'operations'];
+  displayedColumns: string[] = ['id', 'originalTitle', 'localTitle', 'fruit', 'operations'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator= <MatPaginator>{};;

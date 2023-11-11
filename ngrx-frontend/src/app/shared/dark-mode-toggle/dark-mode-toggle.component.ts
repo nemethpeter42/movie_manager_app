@@ -43,9 +43,15 @@ export class DarkModeToggleComponent implements AfterViewInit {
         //this.overlay.getContainerElement().classList.add(darkClassName);
 
         document.querySelectorAll(`html`)[0]?.classList.add(darkClassName);
+        localStorage.setItem("theme", "dark");
       } else {
         document.querySelectorAll(`html`)[0]?.classList.remove(darkClassName);
+        localStorage.setItem("theme", "light");
       }
     });
+    const currentTheme = localStorage.getItem("theme") || "light";
+    if (currentTheme===`dark`){
+      this.toggleControl.setValue(true);
+    }
   }
 }

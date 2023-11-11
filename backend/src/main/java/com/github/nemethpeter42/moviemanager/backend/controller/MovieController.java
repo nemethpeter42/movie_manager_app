@@ -30,6 +30,11 @@ public class MovieController {
         movieService.delete(id);
     }
 
+    @GetMapping("/getAll")
+    public List<Movie> getAll() {
+        return movieService.getAll();
+    }
+
     @GetMapping("/findAllById")
     public List<Movie> findAllById(@RequestParam List<String> ids) {
         return movieService.findAllById(ids);
