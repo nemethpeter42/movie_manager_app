@@ -1,12 +1,12 @@
-import { EntityState, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, Update, createEntityAdapter } from '@ngrx/entity';
 import { Movie } from '../../models/movie.model';
  
 export interface State extends EntityState<Movie> {
   isLoading: boolean;
   //selectedMovieId: string | null;
 }
- 
-const adapter = createEntityAdapter<Movie>();
+ //TODO read through the docs for param sortComparer, is it useful?
+const adapter = createEntityAdapter<Movie>({selectId:e=>e.movieId});
  
 export const initialState: State = adapter.getInitialState({
   isLoading: false,
@@ -20,6 +20,12 @@ const reducer = createReducer(
   initialState,
   on(MovieApiActions.addMovieSuccess, (state, { movie, }) =>
     adapter.addOne(movie, {...state,})
+  ),
+  on(MovieApiActions.updateMovieSuccess, (state, { movie, }) =>
+    adapter.updateOne({id: movie.movieId, changes: movie}, {...state,})
+  ),
+  on(MovieApiActions.getAllMoviesSuccess, (state, { movies, }) => 
+    adapter.setAll(movies, state)
   ),
 );
 

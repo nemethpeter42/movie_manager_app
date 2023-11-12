@@ -11,7 +11,7 @@ export class MovieService {
   constructor(private http: HttpClient) {
   }
 
-  private apiBaseUrl: string = 'https://localhost:8090';
+  private apiBaseUrl: string = 'http://localhost:8090';
 
   getAll(): Observable<Movie[]> {
     return this.http.get<Movie[]>(`${this.apiBaseUrl}/movie/getAll`);

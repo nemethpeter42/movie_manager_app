@@ -10,6 +10,7 @@ import { NavigationEnd, ActivatedRoute, Event as NavigationEvent, Router } from 
 import { Movie } from 'src/app/models/movie.model';
 import { State, movieFeature } from 'src/app/reducers/movie/movie.state';
 import { Store } from '@ngrx/store';
+import { MovieListPageActions } from 'src/app/reducers/movie/movie.actions';
 
 export interface UserData {
   id: string;
@@ -51,6 +52,8 @@ const NAMES: string[] = [
   'Elizabeth',
 ];
 
+//TODO create a shell component based on the NgRx tutorial files from Pluralsight
+
 /**
  * @title List of movies component
  */
@@ -65,7 +68,7 @@ export class MovieListComponent implements AfterViewInit, OnInit {
   public router: Router
   currUrl: string = ``
   constructor(private route: ActivatedRoute, private _router: Router, private store: Store<State>) {
-    this.router = _router
+    this.router = this._router
     this.currRoute$ = _router.events.subscribe((event: NavigationEvent) => {
       if(event instanceof NavigationEnd) {
         const evt = event as NavigationEnd
@@ -82,7 +85,9 @@ export class MovieListComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-      this.movies$ = this.store.select(movieFeature.selectAll)
+    this.movies$ = this.store.select(movieFeature.selectAll);
+
+    this.store.dispatch(MovieListPageActions.getAllMovies());
   }
 
   ngOnDestroy() {
