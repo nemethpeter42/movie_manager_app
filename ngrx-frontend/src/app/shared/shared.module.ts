@@ -14,6 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 const materialModules = [
   MatToolbarModule,
@@ -25,6 +27,8 @@ const materialModules = [
   MatTableModule,
   MatSortModule,
   MatPaginatorModule,
+  MatSelectModule,
+  MatOptionModule,
 ]
 
 @NgModule({

@@ -17,11 +17,11 @@ export class MovieService {
     return this.http.get<Movie[]>(`${this.apiBaseUrl}/movie/getAll`);
   }
 
-  save(movie: Movie): Observable<Movie> {
-    return this.http.post<Movie>(`${this.apiBaseUrl}/movie`, movie);
+  save(movie: Movie): Observable<any> {
+    return this.http.post<Movie>(`${this.apiBaseUrl}/movie`, movie, {responseType:'text' as 'json'});
   }
 
-  delete(courseId: string): Observable<any> {
-    return this.http.delete(`${this.apiBaseUrl}/movie/${courseId}`);
+  delete(movieId: string): Observable<any> {
+    return this.http.delete<Movie>(`${this.apiBaseUrl}/movie/${movieId}`);
   }
 }

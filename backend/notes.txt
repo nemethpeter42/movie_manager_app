@@ -1,5 +1,8 @@
 TODO readme
 
+cmd:
+gradle bootRun
+
 http://localhost:8090/swagger-ui/index.html
 
 test> use demo

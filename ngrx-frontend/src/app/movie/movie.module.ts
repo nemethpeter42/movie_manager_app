@@ -11,6 +11,8 @@ import * as movieEffects from '../reducers/movie/movie.effects';
 import { MovieService } from './services/movie.service';
 import { StoreModule } from '@ngrx/store';
 import { movieFeature } from '../reducers/movie/movie.state';
+import { RouterModule } from '@angular/router';
+import { MovieCommonComponent } from './movie-common/movie-common.component';
 
 
 @NgModule({
@@ -18,6 +20,7 @@ import { movieFeature } from '../reducers/movie/movie.state';
     MovieListComponent,
     MovieCreateComponent,
     MovieUpdateComponent,
+    MovieCommonComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +29,7 @@ import { movieFeature } from '../reducers/movie/movie.state';
     EffectsModule.forFeature(movieEffects),
     StoreModule.forFeature('movie',movieFeature.reducer),
   ],
+  
   providers:[
     MovieService,
   ]

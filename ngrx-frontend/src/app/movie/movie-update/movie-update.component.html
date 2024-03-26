@@ -1,1 +1,38 @@
-<p>movie-update works!</p>
+
+
+<div *ngIf="movieForm.get('movieId')?.value;then content else other_content"></div>
+<ng-template #content>
+  <form [formGroup]="movieForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill" class="w-80">
+      <mat-label>Original title</mat-label>
+      <input matInput formControlName="originalTitle">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="w-80">
+      <mat-label>Local title</mat-label>
+      <input matInput formControlName="localTitle">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="w-80">
+      <mat-label>Precedence</mat-label>
+      <input matInput formControlName="prec">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="w-80">
+      <mat-label>Rating</mat-label>
+      <input matInput formControlName="rating">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="w-80">
+      <mat-label>Release year</mat-label>
+      <input matInput formControlName="releaseYear">
+    </mat-form-field>
+    <br>
+  
+    <div class="button-wrapper">
+      <button mat-flat-button color="primary" [disabled]="!movieForm.valid">Submit</button>
+    </div>
+  </form>
+  
+</ng-template>
+<ng-template #other_content>Loading...</ng-template>

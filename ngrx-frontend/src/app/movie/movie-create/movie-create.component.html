@@ -1,1 +1,45 @@
-<p>movie-create works!</p>
+
+<form [formGroup]="movieForm" (ngSubmit)="submitForm()">
+  <mat-form-field appearance="fill" class="w-80">
+    <mat-label>Original title</mat-label>
+    <input matInput formControlName="originalTitle">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" class="w-80">
+    <mat-label>Local title</mat-label>
+    <input matInput formControlName="localTitle">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" class="w-80">
+    <mat-label>Precedence</mat-label>
+    <input matInput formControlName="prec">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" class="w-80">
+    <mat-label>Rating</mat-label>
+    <input matInput formControlName="rating">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" class="w-80">
+    <mat-label>Release year</mat-label>
+    <input matInput formControlName="releaseYear">
+  </mat-form-field>
+  <br>
+
+  <div class="button-wrapper">
+    <button mat-flat-button color="primary" [disabled]="!movieForm.valid">Submit</button>
+  </div>
+  <!--
+  <mat-form-field appearance="fill" class="w-72">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill"  class="w-80">
+    <mat-label>Textarea</mat-label>
+    <textarea matInput style="resize: none;"></textarea>
+  </mat-form-field>
+-->
+</form>

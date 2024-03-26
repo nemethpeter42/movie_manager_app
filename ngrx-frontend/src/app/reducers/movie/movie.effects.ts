@@ -1,4 +1,4 @@
-import { Observable, catchError, exhaustMap, map, of, switchMap, } from "rxjs";
+import { Observable, catchError, exhaustMap, map, of, switchMap, tap, } from "rxjs";
 import {
   MovieApiActions, 
   MovieCreatePageActions, 
@@ -37,8 +37,8 @@ export const addMovie = createEffect(
       ofType(MovieCreatePageActions.addMovie),
       exhaustMap(action => 
         movieService.save(action.movie).pipe(
-          map((movie) => {
-            return MovieApiActions.addMovieSuccess({ movie, });
+          map((movieId: string) => {
+            return MovieApiActions.addMovieSuccess({ movie: {...action.movie,movieId,} as Movie });
           }),
           catchError((error: any) => {
             return of(MovieApiActions.addMovieFailure({error}));
@@ -55,8 +55,8 @@ export const updateMovie = createEffect(
       ofType(MovieUpdatePageActions.updateMovie),
       exhaustMap(action => 
         movieService.save(action.movie).pipe(
-          map((movie) => {
-            return MovieApiActions.updateMovieSuccess({ movie, });
+          map((id: string) => {
+            return MovieApiActions.updateMovieSuccess({ movie: action.movie, });
           }),
           catchError((error: any) => {
             return of(MovieApiActions.updateMovieFailure({error}));

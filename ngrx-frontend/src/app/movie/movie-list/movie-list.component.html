@@ -7,9 +7,9 @@
 </div>
 <div class="mat-elevation-z8">
   
-  <div *ngIf="(movies$ | async) as movies;">
-    <table mat-table [dataSource]="movies" matSort>
-      <ng-container matColumnDef="id">
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="movieId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
         <td mat-cell *matCellDef="let row"> {{row.movieId}} </td>
       </ng-container>
@@ -24,19 +24,12 @@
         <td mat-cell *matCellDef="let row"> {{row.localTitle}} </td>
       </ng-container>
 
-      <!-- Fruit Column -->
-      <ng-container matColumnDef="fruit">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
-        <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
-      </ng-container>
-
-      <!-- Fruit Column -->
       <ng-container matColumnDef="operations">
         <th mat-header-cell *matHeaderCellDef><div class="mx-4"> Operations </div></th>
         <td mat-cell *matCellDef="let row"> 
           <div class="flex flex-row">
             <button mat-stroked-button class="mx-2" (click)="this.router.navigate(['/movie/update', row.movieId])">Edit</button>
-            <button mat-stroked-button class="mx-2" color="warn">Delete</button>
+            <button mat-stroked-button class="mx-2" (click)="deleteMovie(row.movieId)" color="warn">Delete</button>
           </div>
         </td>
       </ng-container>
@@ -55,6 +48,6 @@
     <div>
       <button mat-stroked-button class="mx-2" (click)="this.router.navigate(['/movie/create',])">Add new item</button>
     </div>
-    <mat-paginator [pageSizeOptions]="[25, 50, 100]" aria-label="Select page of movies"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" [length]="10" aria-label="Select page of movies"></mat-paginator>
   </div>
 </div>

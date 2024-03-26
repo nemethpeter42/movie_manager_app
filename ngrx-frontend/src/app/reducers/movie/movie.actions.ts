@@ -43,5 +43,6 @@ export const MovieApiActions = createActionGroup({
     deleteMovieFailure: props<{ error: any }>(),
     getAllMoviesSuccess: props<{ movies: Movie [] }>(),
     getAllMoviesFailure: props<{ error: any }>(),
+    selectMovie: props<{ id: string }>(),
   },
 })
